@@ -1,5 +1,3 @@
-var snake=[[0,0]];
-
 ///canvas
 var can = document.getElementById('canvas');
 //can.height = 1000; can.width = 1300;
@@ -10,46 +8,35 @@ ctx.fillStyle = "black";
 
 
 
-function loadSnake(){
-let len=snake.length-1
-  
- let coordToDraw=snake[len]
-  ctx.fillRect((coordToDraw[0]+dir[0]), (coordToDraw[1]+dir[1]), 5, 5); 
-  snake.push([coordToDraw[0]+dir[0], coordToDraw[1]+dir[1]]);
-  setInterval(loadSnake, 2000);
-  
-  
-  
-  }
 
+function logKey(e){
 
-
-
-
-
-
-function initState(){
-  ctx.fillRect(0, 0, 5, 5);
-  dir=[1,0]
-  loadSnake();
-
+let result
+   switch (e.key) {
+   
+   case "ArrowUp":
+        result="up";
+        break
+   case "ArrowLeft":
+        result="left";
+        break
+   case  "ArrowRight":
+         result="right"
+         break
+   case "ArrowDown":
+         result="down"
+         break
+   }
+//console.log(result)
+snake.changeDirection(result);
 }
-
-
-
-
-
-
+/////Events
 document.addEventListener("keydown", logKey);
 
-window.addEventListener("load", initState);
+//window.addEventListener("load", initState);
 
+let snake =new Snake(10,ctx,[[0,0]],[0,0]);
 
+let setmovie=setInterval(()=>{snake.moove()},100);
 
-///key logger 
-function logKey (e){
-  debugger
-  e.preventDefault();
-  snakeChange(e.key);
- 
-};
+let setrender=setInterval(()=>{snake.renderit()},100);
