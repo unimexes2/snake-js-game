@@ -1,42 +1,58 @@
 ///canvas
 var can = document.getElementById('canvas');
-//can.height = 1000; can.width = 1300;
+const dispalyRes=[500,500]
 
+can.height = dispalyRes[0]; can.width = dispalyRes[1];
 var ctx = can.getContext('2d');
-var x = 10, y = 100, dir=[];
+var x = 10, y = 100, dir=[],direction="";
 ctx.fillStyle = "black";
 
 
 
 
 function logKey(e){
+   console.log(e.key,direction)
 
-let result
    switch (e.key) {
    
    case "ArrowUp":
-        result="up";
+        direction="up";
         break
    case "ArrowLeft":
-        result="left";
+        direction="left";
         break
    case  "ArrowRight":
-         result="right"
+         direction="right"
          break
    case "ArrowDown":
-         result="down"
+         direction="down"
          break
    }
-//console.log(result)
-snake.changeDirection(result);
+snake.changeDirection(direction);
 }
+
+
 /////Events
 document.addEventListener("keydown", logKey);
 
 //window.addEventListener("load", initState);
+//Snake DIM,CTX,Init pocition(xy,)(should be >0),Direction of mooving(x,y)
+let snake =new Snake(20,ctx,[[1,1]],[0,0],dispalyRes);
 
-let snake =new Snake(10,ctx,[[0,0]],[0,0]);
-
-let setmovie=setInterval(()=>{snake.moove()},100);
+let setmovie=setInterval(()=>{snake.moove()},400);
 
 let setrender=setInterval(()=>{snake.renderit()},100);
+
+
+let obstacle= new Obstacle(20,[500,500],snake.allSnake);
+
+
+obstacle.tobe();
+
+//obstacle.renderit();
+
+
+
+//let setrenderObs=setInterval(()=>{obstacle.renderit()},5);
+
+
