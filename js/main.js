@@ -37,12 +37,13 @@ document.addEventListener("keydown", logKey);
 
 //window.addEventListener("load", initState);
 //Snake DIM,CTX,Init pocition(xy,)(should be >0),Direction of mooving(x,y)
-let snake =new Snake(20,ctx,[[1,1]],[0,0],dispalyRes);
+let snake =new Snake(20,ctx,[[1,1]],[0,0],dispalyRes,[[1,1,1,1][1,1,1,1]]);
+
+snake.born();
 
 let setmovie=setInterval(()=>{snake.moove()},400);
 
 let setrender=setInterval(()=>{snake.renderit()},100);
-
 
 let obstacle= new Obstacle(20,[500,500],snake.allSnake);
 

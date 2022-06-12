@@ -1,11 +1,13 @@
 class Snake {
-      constructor(sizeProp, ctxProp,arrProp,dirProp,dispSizeProp) {
+      constructor(sizeProp, ctxProp,arrProp,dirProp,dispSizeProp,allSnakeCollisionProp) {
          
         this.size = sizeProp;
         this.ctx=ctxProp;
         this.allSnake=arrProp;
         this.directionXY=dirProp;
         this.dispSize=dispSizeProp;
+        this.allSnakeCollision=allSnakeCollisionProp;
+
       }
 
 
@@ -24,7 +26,7 @@ renderit(){
 
 ////Direction change
 changeDirection(dir){
-debugger
+     
       switch (dir)
       
       {
@@ -46,84 +48,89 @@ debugger
 }
 
 moove(){
+
 let snLength=this.allSnake.length
 let step=this.allSnake[snLength-1]
+let stepBefore=this.allSnake[snLength-2]
+let dirx;
+let diry;
 let nextStep =[step[0]+this.directionXY[0], step[1]+this.directionXY[1]]
-debugger
+let splice=true;
 
-
+///////////direction setup
+this.directionXY[0]>=0?dirx=1:dirx=-1;
+this.directionXY[1]>=0?diry=1:diry=-1;
 ///wall detect
 
 if(nextStep[0]>=this.dispSize[0]||nextStep[0]<0||nextStep[1]>=this.dispSize[1]||nextStep[1]<0)
-{this.dead();
-      
+{this.dead()}
 
+///form all Snake
+////set colission area
 
-}
+if (this.directionXY[0]+this.directionXY[1]!=0){
 
+      if(step>2){
+let elFour=this.allSnake[step-2]
 
+let q=[elFour[0], elFour[1]]
+let w=[elFour[0], elFour[1]-this.size];
+let e=[elFour[0]-this.size, elFour[1]-this.size];
+let r=[elFour[0]-this.size,elFour[1]];
 
-////set  colission area
-
-let colissionArr=[];
-for(let i=1; i<this.size;i++){
-      for(let j=0; j<this.size;j++){
-            colissionArr.push([nextStep[0]+i,nextStep[1]+j])
-            //colissionArr.push([nextStep[0]-i,nextStep[1]-j])
-            }
-} 
-debugger
-try {
-let myVal=false;
-
-////check colision with itself
-debugger
-let snakeLength=this.allSnake.length;
-let lengthCol=colissionArr.length;
-
-
-for (let j=0;j<snakeLength; j++){
-      debugger
-      for (let i=0;i<lengthCol;i++){
-
-            let a=JSON.stringify(colissionArr[j])
-            let b=JSON.stringify(this.allSnake[i])
-          
-                if (JSON.stringify(colissionArr[i])==JSON.stringify(this.allSnake[i])){
-                      console.log("UUUUPS")
-                     // this.dead()       
-                  }
-          
       }
+             
+             
+
+            
       
+///Check colission function
+
+function detectColision(arr1,arr2){
+      let len1=arr1.length;
+      let len2=arr2.length;
+      for(let i=0;i<len1;i++){
+            let a=JSON.stringify(arr1[i])
+            for(let j=0;j<len2;j++){
+            
+            let b=JSON.stringify(arr2[j])
+                     
+            if (a==b){return true}
+      }
+  
+      }
+      return false;
+}    
       
-}
+if(detectColision([step],obstacle.obstacleArea)){
+   
+      // console.log("siiii growwwwww")
+       this.allSnake.push(nextStep);    
+       splice=false ;     
+   
+ }
+ 
 
+////check colision
+let col=[...this.allSnake]
+if(col.length>3){
+col.splice(col.length-3)
+if(detectColision(col,[nextStep])){
 
-////fooood detect
+      debugger
+      console.log("choke",)
+      console.log("collision",this.allSnakeCollision,"step is",nextStep)
 
-for (let i=0;i<lengthCol;i++){
+       this.dead();
+}}
 
-  let a=colissionArr[i];
-  let b=[obstacle.coord[0]+this.size/2,obstacle.coord[1]+this.size/2]
-
-      if (JSON.stringify(a)==JSON.stringify(b)){
-            this.allSnake.push (nextStep);
-            console.log("growww")
-            ////new obstacle
-            obstacle.tobe();
-        }
-
-}}      
-    catch(err) {
-      
-    }
 ///the step
 this.allSnake.push (nextStep);
-this.allSnake.shift();
+this.allSnake.shift(0,step);
+//this.allSnakeCollision.push(q,w,e,r);}
 
-
-}
+//splice?this.allSnakeCollision.splice(0,4):""
+}}
 
 
 
@@ -134,6 +141,13 @@ dead(){
       alert("Game Over!")
 ////need to write return to initial state
 }
+
+
+born(){
+
+
+}
+
 
 
 }
