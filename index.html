@@ -8,10 +8,52 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
- 
-  <canvas id="canvas" style="background:rgba(34,45,23,0.4)"></canvas>
+ <div id="gameplay">
+  
+
+<div id="main">
+  <h2>THE SCORE IS:<h3 id="score">0</h3></h2>
+</div>
+<div>
+<canvas id="canvas" style="background:olive"></canvas>
+<button id="reset-btn" onclick="startGame()">RESET</button>
+</div>
 
 
+<div id="gameprop">
+    <div>
+    <label for="screen-size">Screen size</label>
+    <select id="screen-size" name="screem-size">
+      <option value="760">760X760</option>
+      <option value="500">500X500</option>
+      <option value="260">260X260</option>
+      <option value="100">100X100</option>
+    </select>
+</div>
+<div>
+    <label for="snake-size">Snake-size</label>
+    <select id="snake-size" name="Snake size">
+      <option value="20">20</option>
+      <option value="10">10</option>
+      <option value="5">5</option>
+      <option value="3">2</option>
+    </select>
+</div>
+    <div>
+    <label for="speed">Speed</label>
+
+    <select id="speed" name="Speed">
+      <option value="400">EASY</option>
+      <option value="300">MEDIUM</option>
+      <option value="200">FAST</option>
+      <option value="100">EXPERT</option>
+    </select>
+   
+    </div>
+    
+
+  </div>
+</div>
   <script src="./js/obstacle.js"></script> 
   <script src="./js/snake.js"></script>
   <script src="./js/main.js"></script> 

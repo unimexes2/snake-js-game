@@ -13,13 +13,13 @@ tobe(){
 
 ////////////////
 
-  function detectColision(arr1,arr2){
+function detectColision(arr1,arr2){
     let len1=arr1.length;
     let len2=arr2.length;
     for(let i=0;i<len1;i++){
     for(let j=0;j<len2;j++){
-          let a=JSON.stringify(arr1[i])
-          let b=JSON.stringify(arr2[j])
+       let a=JSON.stringify(arr1[i])
+        let b=JSON.stringify(arr2[j])
           if (a==b){return true}
     }
 
@@ -27,38 +27,35 @@ tobe(){
     return false;
 }    
 
-let x =Math.random()*(this.displayArea[0]);
-let y= Math.random()*(this.displayArea[1]);
+
+let netValueX= (this.displayArea[0]-this.size)/this.size
+let x =Math.random()*netValueX;
 x=Math.round(x);
+x=x*this.size+1;
+
+let netValueY= (this.displayArea[1]-this.size)/this.size
+let y =Math.random()*netValueY;
 y=Math.round(y);
+y=y*this.size+1;
+console.log('xy coord',x,y)
 this.coord=[x,y]
 
-
+//debugger
 if(detectColision(this.coord,snake.allSnake)){
+  
   this.tobe
 }else{
-
-for(let i=1; i<this.size;i++){
-     
-  for(let j=0; j<this.size;j++){
-        
-        console.log("born")
-  
-        this.obstacleArea.push([this.coord[0]+i,this.coord[1]+j])
-        
-        }
+  return [x,y]
   }
-return [x,y]}
-} 
+}
+
 
 
 
 renderit(){
-     
+  ctx.fillStyle = "#FF0000";
 
-    ctx.fillRect(this.coord[0], this.coord[1], this.size, this.size);
-
-
+ ctx.fillRect(this.coord[0], this.coord[1], this.size, this.size);
 }
 
 

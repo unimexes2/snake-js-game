@@ -3,4 +3,23 @@
 display:flex;
 margin: auto;
 }
+#gameplay{display:flex;
+flex-direction:row;}
 
+#gameprop{
+display: flex;
+flex-direction: column;
+
+
+}
+div{margin: auto;
+margin-top: 10px;
+display: flex;
+flex-direction: column;}
+
+button{
+    margin-top: 20px;
+    width: 150px;
+    align-self: center;
+}
+h3{align-self: center;}

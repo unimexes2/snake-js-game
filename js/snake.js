@@ -1,57 +1,72 @@
 class Snake {
-      constructor(sizeProp, ctxProp,arrProp,dirProp,dispSizeProp,allSnakeCollisionProp) {
+      constructor(sizeProp, ctxProp,arrProp,dirProp,dispSizeProp) {
          
         this.size = sizeProp;
         this.ctx=ctxProp;
         this.allSnake=arrProp;
         this.directionXY=dirProp;
         this.dispSize=dispSizeProp;
-        this.allSnakeCollision=allSnakeCollisionProp;
-
+        this.collDetect;      
+        this.stepsDid=0;
       }
 
-
-
-
-
 renderit(){
-// console.log(this.allSnake,this.size,this.directionXY)
+
       ctx.clearRect(0, 0, canvas.width, canvas.height); 
-      this.allSnake.forEach((val)=>{
-      ctx.fillRect(val[0], val[1], this.size, this.size); 
+          
+      ctx.fillStyle = 'blue';
+      ctx.strokeStyle = 'black';
+
+     
+     
+     
+      this.allSnake.forEach((val,index)=>{
+/*      if(index==0){
+            ctx.arc(val[0], val[1], this.size, 0, 2 * Math.PI);
+            ctx.stroke();
+
+      }*/
+      ctx.strokeRect(val[0], val[1], this.size, this.size); 
+      ctx.fillRect(val[0], val[1], this.size, this.size);
+}      
+
+
+      )
       obstacle.renderit();
-})}
+      if(this.stepsDid>0){score.innerHTML=parseInt(this.stepsDid*20+this.allSnake.length*25)};
 
-
+}
 
 ////Direction change
 changeDirection(dir){
+     let dim= this.size;
+      this.stepsDid=1;
      
       switch (dir)
       
       {
       case "right":
-      this.directionXY[0]>=0?this.directionXY.splice(0,2,this.size,0):"";
+      if (this.directionXY[0]===0){this.directionXY.splice(0,2,dim,0)};
       break
       case "left":
-      this.directionXY[0]<=0?this.directionXY.splice(0,2,-this.size,0):"";
+      if(this.directionXY[0]===0){this.directionXY.splice(0,2,(-dim),0)};
       break
       case "up":
-      this.directionXY[1]>=0?this.directionXY.splice(0,2,0,-this.size):"";
+      if(this.directionXY[1]===0){this.directionXY.splice(0,2,0,(-dim))};
       break
       case "down":
-      this.directionXY[1]>=0?this.directionXY.splice(0,2,0,this.size):"";
+      if (this.directionXY[1]===0){this.directionXY.splice(0,2,0,dim)};
       break      
 
 }
-//this.direction=dir;
+
 }
+
 
 moove(){
 
 let snLength=this.allSnake.length
 let step=this.allSnake[snLength-1]
-let stepBefore=this.allSnake[snLength-2]
 let dirx;
 let diry;
 let nextStep =[step[0]+this.directionXY[0], step[1]+this.directionXY[1]]
@@ -65,34 +80,15 @@ this.directionXY[1]>=0?diry=1:diry=-1;
 if(nextStep[0]>=this.dispSize[0]||nextStep[0]<0||nextStep[1]>=this.dispSize[1]||nextStep[1]<0)
 {this.dead()}
 
-///form all Snake
-////set colission area
 
-if (this.directionXY[0]+this.directionXY[1]!=0){
-
-      if(step>2){
-let elFour=this.allSnake[step-2]
-
-let q=[elFour[0], elFour[1]]
-let w=[elFour[0], elFour[1]-this.size];
-let e=[elFour[0]-this.size, elFour[1]-this.size];
-let r=[elFour[0]-this.size,elFour[1]];
-
-      }
-             
-             
-
-            
-      
 ///Check colission function
 
-function detectColision(arr1,arr2){
+this.collDetect=   function detectColision(arr1,arr2){
       let len1=arr1.length;
       let len2=arr2.length;
       for(let i=0;i<len1;i++){
             let a=JSON.stringify(arr1[i])
             for(let j=0;j<len2;j++){
-            
             let b=JSON.stringify(arr2[j])
                      
             if (a==b){return true}
@@ -102,51 +98,49 @@ function detectColision(arr1,arr2){
       return false;
 }    
       
-if(detectColision([step],obstacle.obstacleArea)){
+
+if(this.collDetect(obstacle.snake,[obstacle.coord])){
    
-      // console.log("siiii growwwwww")
+       console.log("siiii growwwwww")
        this.allSnake.push(nextStep);    
        splice=false ;     
-   
+       obstacle.coord=obstacle.tobe()
+  
  }
- 
 
-////check colision
-let col=[...this.allSnake]
-if(col.length>3){
-col.splice(col.length-3)
-if(detectColision(col,[nextStep])){
+ ////check11 colision
 
-      debugger
+////collision is only possible then the  snake has more then 4 elements 
+ let col=[...this.allSnake]
+if(col.length>4){
+
+   col.splice(col.length-4)
+   
+   if(this.collDetect(col,[nextStep])){
+
       console.log("choke",)
-      console.log("collision",this.allSnakeCollision,"step is",nextStep)
-
-       this.dead();
+      
+      this.dead();
 }}
 
 ///the step
 this.allSnake.push (nextStep);
+this.stepsDid*=1.015;
 this.allSnake.shift(0,step);
-//this.allSnakeCollision.push(q,w,e,r);}
 
-//splice?this.allSnakeCollision.splice(0,4):""
-}}
-
-
-
-dead(){
+}
+dead(){debugger
       clearInterval(setrender);
       clearInterval(setmovie);
-      
       alert("Game Over!")
 ////need to write return to initial state
 }
-
-
 born(){
-
+console.log("I am alive")
 
 }
+
+
 
 
 

@@ -1,14 +1,15 @@
 ///canvas
 var can = document.getElementById('canvas');
-const dispalyRes=[500,500]
-
-can.height = dispalyRes[0]; can.width = dispalyRes[1];
-var ctx = can.getContext('2d');
-var x = 10, y = 100, dir=[],direction="";
-ctx.fillStyle = "black";
-
-
-
+var dispalyRes=[760,760]
+var ctx;
+var direction="";
+var snake;
+var obstacle;
+var blockSize=20;
+var setmovie
+var setrender
+var setspeed=400;
+///logger
 
 function logKey(e){
    console.log(e.key,direction)
@@ -28,32 +29,67 @@ function logKey(e){
          direction="down"
          break
    }
-snake.changeDirection(direction);
+   setTimeout( snake.changeDirection(direction),300);
 }
 
 
 /////Events
 document.addEventListener("keydown", logKey);
+document.querySelector("#screen-size").addEventListener("change", changeDispParam);
+document.querySelector("#snake-size").addEventListener("change", changeSnakeParam);
+document.querySelector("#speed").addEventListener("change", changeSpeedParam);
 
-//window.addEventListener("load", initState);
+///event functions
+function changeDispParam(e){
+console.log("paramchange",e.currentTarget.value)
+////clean all the valuables 
+clearInterval(setrender);
+clearInterval(setmovie);
+delete snake;
+delete obstacle;
+dispalyRes.splice(0);
+dispalyRes.push(parseInt(e.currentTarget.value))
+dispalyRes.push(parseInt(e.currentTarget.value))
+setTimeout( startGame(),200);
+}
+function changeSnakeParam(e){
+console.log("paramchange",e.currentTarget.value)
+blockSize=parseInt(e.currentTarget.value);      
+////clean all the valuables
+clearInterval(setrender);
+clearInterval(setmovie);
+delete snake;
+delete obstacle;
+setTimeout( startGame(),200);
+     
+  }
+function changeSpeedParam(e){
+console.log("paramchange",e.currentTarget.value)
+setspeed=parseInt(e.currentTarget.value);      
+////clean all the valuables
+clearInterval(setrender);
+clearInterval(setmovie);
+delete snake;
+delete obstacle;
+setTimeout( startGame(),200);
+
+  }
+      
+
 //Snake DIM,CTX,Init pocition(xy,)(should be >0),Direction of mooving(x,y)
-let snake =new Snake(20,ctx,[[1,1]],[0,0],dispalyRes,[[1,1,1,1][1,1,1,1]]);
-
-snake.born();
-
-let setmovie=setInterval(()=>{snake.moove()},400);
-
-let setrender=setInterval(()=>{snake.renderit()},100);
-
-let obstacle= new Obstacle(20,[500,500],snake.allSnake);
-
-
-obstacle.tobe();
-
-//obstacle.renderit();
+function startGame(){
+    can.height = dispalyRes[0]; can.width = dispalyRes[1];
+    ctx= can.getContext('2d');
+    snake=new Snake(blockSize,ctx,[[1,1]],[0,0],dispalyRes);
+    snake.born();
+    setmovie=setInterval(()=>{snake.moove()},setspeed);
+    setrender=setInterval(()=>{snake.renderit()},40);
+    obstacle= new Obstacle(blockSize,dispalyRes,snake.allSnake);
+    obstacle.tobe();
+};
+let score=document.querySelector("#score")
+startGame();
 
 
-
-//let setrenderObs=setInterval(()=>{obstacle.renderit()},5);
 
 
