@@ -54,8 +54,24 @@ if(detectColision(this.coord,snake.allSnake)){
 
 renderit(){
   ctx.fillStyle = "#FF0000";
+  ctx.beginPath();
+  //ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+  const centerX = this.coord[0]+this.size/2;
+  const centerY = this.coord[1]+this.size/2;
+  const radius = this.size/2;
+  
+  //context.beginPath();
+  ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+  ctx.fillStyle = 'red';
+  ctx.fill();
+  ctx.lineWidth = 2;
+1  
+  ctx.strokeStyle = '#003300';
+  ctx.stroke();
 
- ctx.fillRect(this.coord[0], this.coord[1], this.size, this.size);
+
+
+ //ctx.fillarc(this.coord[0], this.coord[1], this.size, this.size);
 }
 
 

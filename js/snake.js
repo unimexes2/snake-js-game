@@ -114,7 +114,7 @@ if(this.collDetect(obstacle.snake,[obstacle.coord])){
  let col=[...this.allSnake]
 if(col.length>4){
 
-   col.splice(col.length-4)
+   col.splice(col.length-3)
    
    if(this.collDetect(col,[nextStep])){
 

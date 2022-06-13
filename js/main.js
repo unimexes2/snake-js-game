@@ -83,7 +83,7 @@ function startGame(){
     snake=new Snake(blockSize,ctx,[[1,1]],[0,0],dispalyRes);
     snake.born();
     setmovie=setInterval(()=>{snake.moove()},setspeed);
-    setrender=setInterval(()=>{snake.renderit()},40);
+    setrender=setInterval(()=>{snake.renderit()},10);
     obstacle= new Obstacle(blockSize,dispalyRes,snake.allSnake);
     obstacle.tobe();
 };
