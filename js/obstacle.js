@@ -9,9 +9,7 @@ class Obstacle {
       
     }
 tobe(){
-/////////////////
 
-////////////////
 
 function detectColision(arr1,arr2){
     let len1=arr1.length;
@@ -27,26 +25,24 @@ function detectColision(arr1,arr2){
     return false;
 }    
 
+/////born of new obstacle
 
 let netValueX= (this.displayArea[0]-this.size)/this.size
 let x =Math.random()*netValueX;
-x=Math.round(x);
-x=x*this.size+1;
+x=Math.round(x)*this.size+1;
+
 
 let netValueY= (this.displayArea[1]-this.size)/this.size
 let y =Math.random()*netValueY;
-y=Math.round(y);
-y=y*this.size+1;
-console.log('xy coord',x,y)
+y=Math.round(y)*this.size+1;
 this.coord=[x,y]
 
-//debugger
 if(detectColision(this.coord,snake.allSnake)){
   
   this.tobe
-}else{
-  return [x,y]
-  }
+        }else{
+          return [x,y]
+         }
 }
 
 
@@ -55,14 +51,12 @@ if(detectColision(this.coord,snake.allSnake)){
 renderit(){
   ctx.fillStyle = "#FF0000";
   ctx.beginPath();
-  //ctx.arc(100, 75, 50, 0, 2 * Math.PI);
   const centerX = this.coord[0]+this.size/2;
   const centerY = this.coord[1]+this.size/2;
   const radius = this.size/2;
   
-  //context.beginPath();
   ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-  ctx.fillStyle = 'red';
+  ctx.fillStyle = 'orange';
   ctx.fill();
   ctx.lineWidth = 2;
 1  
@@ -71,7 +65,6 @@ renderit(){
 
 
 
- //ctx.fillarc(this.coord[0], this.coord[1], this.size, this.size);
 }
 
 

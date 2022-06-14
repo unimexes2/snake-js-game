@@ -5,9 +5,9 @@ var ctx;
 var direction="";
 var snake;
 var obstacle;
-var blockSize=20;
-var setmovie
-var setrender
+var blockSize=40;
+var setmovie;
+var setrender;
 var setspeed=400;
 ///logger
 
@@ -28,9 +28,26 @@ function logKey(e){
    case "ArrowDown":
          direction="down"
          break
-   }
+
+case " ":
+ pauseGame()
+;}
+
+
+         
+   
    setTimeout( snake.changeDirection(direction),300);
 }
+function pauseGame(){
+if (snake.nopause){
+  snake.nopause=false
+ 
+} else{  snake.nopause=true;}
+}
+
+
+
+
 
 
 /////Events
@@ -53,7 +70,6 @@ dispalyRes.push(parseInt(e.currentTarget.value))
 setTimeout( startGame(),200);
 }
 function changeSnakeParam(e){
-console.log("paramchange",e.currentTarget.value)
 blockSize=parseInt(e.currentTarget.value);      
 ////clean all the valuables
 clearInterval(setrender);
@@ -64,7 +80,7 @@ setTimeout( startGame(),200);
      
   }
 function changeSpeedParam(e){
-console.log("paramchange",e.currentTarget.value)
+
 setspeed=parseInt(e.currentTarget.value);      
 ////clean all the valuables
 clearInterval(setrender);
@@ -74,7 +90,9 @@ delete obstacle;
 setTimeout( startGame(),200);
 
   }
-      
+  function reset1(){
+    window.location.reload();
+    }
 
 //Snake DIM,CTX,Init pocition(xy,)(should be >0),Direction of mooving(x,y)
 function startGame(){

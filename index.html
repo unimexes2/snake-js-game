@@ -8,15 +8,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
- <div id="gameplay">
+<div id="header"><div id="h1" ><h1>THE SNAKE</h1></div> </div>
+  <div id="gameplay">
   
 
 <div id="main">
-  <h2>THE SCORE IS:<h3 id="score">0</h3></h2>
+  <h2>THE SCORE IS:<div id="score-div"><h3 id="score">0</h3><div id="score-div"></h2>
+<h3> KEYS :</h3>
+<h3>UP - arrow up<br>DOWN -arrow down<br>LEFT -arrow left<br>RIGHT - arrow right<br>PAUSE/RESUME- spacebar
+</h3>
+
+
 </div>
 <div>
-<canvas id="canvas" style="background:olive"></canvas>
-<button id="reset-btn" onclick="startGame()">RESET</button>
+<canvas id="canvas"></canvas>
+
 </div>
 
 
@@ -24,15 +30,16 @@
     <div>
     <label for="screen-size">Screen size</label>
     <select id="screen-size" name="screem-size">
-      <option value="760">760X760</option>
-      <option value="500">500X500</option>
-      <option value="260">260X260</option>
+      <option value="720">720X720</option>
+      <option value="520">520X520</option>
+      <option value="320">320X320</option>
       <option value="100">100X100</option>
     </select>
 </div>
 <div>
     <label for="snake-size">Snake-size</label>
     <select id="snake-size" name="Snake size">
+      <option value="40">40</option>
       <option value="20">20</option>
       <option value="10">10</option>
       <option value="5">5</option>
@@ -50,7 +57,7 @@
     </select>
    
     </div>
-    
+    <button id="reset-btn" onclick="reset1()">RESET</button>
 
   </div>
 </div>
