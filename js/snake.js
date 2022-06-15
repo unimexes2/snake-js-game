@@ -10,6 +10,8 @@ class Snake {
         this.stepsDid=0;
         this.nopause=true;
         this.scoreNumber=0;
+        ///control state valuable 
+       /// this.progState=false;
       }
 
 renderit(){
@@ -76,6 +78,7 @@ changeDirection(dir){
 moove(){
       ///pause function check
       debugger
+      
 if(this.nopause){
 let snLength=this.allSnake.length
 let step=this.allSnake[snLength-1]
@@ -83,7 +86,8 @@ let dirx;
 let diry;
 let nextStep =[step[0]+this.directionXY[0], step[1]+this.directionXY[1]]
 let splice=true;
-
+///counter starts
+///(this.allSnake[0]>1||this.allSnake[1]>1)?this.progState=true:"";
 ///////////direction setup
 this.directionXY[0]>=0?dirx=1:dirx=-1;
 this.directionXY[1]>=0?diry=1:diry=-1;
@@ -154,13 +158,13 @@ dead(){
       
       ctx.fillStyle = 'red';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = "30px Arial";
+      ctx.font='bold 30px Arial';
       ctx.fillStyle = 'white';
       ctx.fillText("GAME OVER",this.dispSize[0]/2-100, this.dispSize[1]/2-60);
       ctx.fillText("YOUR SCORE IS "+this.scoreNumber,this.dispSize[0]/2-150, this.dispSize[1]/2);     
-     
+      //this.scoreNumber=0;
 
-
+     // score.innerHTML=this.scoreNumber;
 }else{
 
   alert("Game Over!")
