@@ -10,6 +10,8 @@ class Snake {
         this.stepsDid=0;
         this.nopause=true;
         this.scoreNumber=0;
+        this.countSound=true;
+        this.audio;
         ///control state valuable 
        /// this.progState=false;
       }
@@ -43,7 +45,12 @@ renderit(){
 
       )
       obstacle.renderit();
-      if(this.stepsDid>0){
+      ///scorecoun
+    
+      if(this.stepsDid>0){ 
+          
+      
+
       this.scoreNumber=  parseInt(this.stepsDid*20+this.allSnake.length*25);    
       score.innerHTML=this.scoreNumber;};
 
@@ -77,8 +84,14 @@ changeDirection(dir){
 
 moove(){
       ///pause function check
-      debugger
-      
+    //  debugger
+      if(this.countSound){
+            this.audio = new Audio("./sound/15 BGM 12.mp3");
+            this.audio.volume = 0.2;
+            this.audio.play();
+      this.countSound=false;
+
+      }  
 if(this.nopause){
 let snLength=this.allSnake.length
 let step=this.allSnake[snLength-1]
@@ -148,7 +161,7 @@ this.allSnake.shift(0,step);
 
 }}
 dead(){
-      
+      this.audio.muted=true;
       this.stepsDid=0;
       clearInterval(setrender);
       clearInterval(setmovie);

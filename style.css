@@ -56,6 +56,14 @@ button{
   
   
 }
+
+#start-btn{
+    min-height: 80px;
+    background-color: green;
+    border-color: orange;
+    color:aliceblue;
+}
+
 h3{align-self: center;
    }
    #h1{

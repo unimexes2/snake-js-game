@@ -10,14 +10,16 @@ var setmovie;
 var setrender;
 var setspeed=400;
 let progState=true;
+let eventTime=0;
 ///logger
 
 snake=new Snake(blockSize,ctx,[[1,1]],[0,0],dispalyRes);
     snake.born();
 
-function logKey(e){
-   console.log(e.key,direction)
 
+function logKey(e){
+  // console.log(e.key,direction)
+debugger
    switch (e.key) {
    
    case "ArrowUp":
@@ -36,9 +38,11 @@ function logKey(e){
 case " ":
  pauseGame()
 ;}
-  
-   setTimeout( snake.changeDirection(direction),200);
-}
+  if(e.timeStamp-eventTime>300){
+   snake.changeDirection(direction);
+   eventTime=e.timeStamp;
+  }
+  }
 function pauseGame(){
 if (snake.nopause){
   snake.nopause=false
