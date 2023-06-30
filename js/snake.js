@@ -13,7 +13,7 @@ class Snake {
             this.countSound = true;
             this.audio;
             ///control state valuable 
-            /// this.progState=false;
+        
       }
 
       renderit() {
@@ -42,7 +42,7 @@ class Snake {
             }
             )
             obstacle.renderit();
-            ///scorecoun
+            ///scorecount
 
             if (this.stepsDid > 0) {
 
@@ -79,7 +79,7 @@ class Snake {
 
       moove() {
             ///pause function check
-            //  debugger
+        
             if (this.countSound) {
 
                   this.audio = new Audio("./sound/15 BGM 12.mp3");
@@ -126,7 +126,6 @@ class Snake {
                   if (this.collDetect(obstacle.snake, [obstacle.coord])) {
 
                         this.stepsDid = 1;
-                        console.log("siiii growwwwww")
                         this.allSnake.push(nextStep);
                         splice = false;
                         obstacle.coord = obstacle.tobe()
@@ -173,9 +172,7 @@ class Snake {
                   ctx.fillStyle = 'white';
                   ctx.fillText("GAME OVER", this.dispSize[0] / 2 - 100, this.dispSize[1] / 2 - 60);
                   ctx.fillText("YOUR SCORE IS " + this.scoreNumber, this.dispSize[0] / 2 - 150, this.dispSize[1] / 2);
-                  //this.scoreNumber=0;
-
-                  // score.innerHTML=this.scoreNumber;
+                         
             } else {
 
                   alert("Game Over!")
@@ -184,7 +181,7 @@ class Snake {
       }
       born() {
 
-            console.log("I am alive")
+    
 
       }
 
